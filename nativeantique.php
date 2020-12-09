@@ -7,7 +7,7 @@
  /*
  Plugin Name: nativeAntique PLugin
  Description: This is a nativeAntique wordpress plugin 
- Author: RanProgramming
+ Author: Randolfh
  Author URI: https://github.com/Ran05
  Version: 1.0.0
  License: GPLv2 or later
@@ -19,8 +19,7 @@ defined('ABSPATH') or die('You are not in wordpress.');
 
 class nativeAntiquePlugin{
 
-//=======start my method here===//
-
+//New method
 
 function register(){
     //for javascript
@@ -57,7 +56,28 @@ function custom_post_type(){
 register_post_type('Products',['public' => true, 'labels' => array('name' =>__('Products'),
  'singular_name'=> __('Products'),'add new item' => __('Add new Products'), 'add_new' =>__('Add Products'))]);
 
-}//=======End of Method here=====//
+}
+
+// Our custom post type function
+function create_posttype() {
+ 
+    register_post_type( 'movies',
+    // CPT Options
+        array(
+            'labels' => array(
+                'name' => __( 'Movies' ),
+                'singular_name' => __( 'Movie' )
+            ),
+            'public' => true,
+            'has_archive' => true,
+            'rewrite' => array('slug' => 'movies'),
+            'show_in_rest' => true,
+ 
+        )
+    );
+}
+// Hooking up our function to theme setup
+add_action( 'init', 'create_posttype' );
 
 
 
